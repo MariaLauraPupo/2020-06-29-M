@@ -1,7 +1,10 @@
 package it.polito.tdp.imdb.model;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.jgrapht.Graphs;
 import org.jgrapht.graph.DefaultWeightedEdge;
@@ -38,7 +41,18 @@ public class Model {
 
 				
 		}
-	
-	
+	public Set<Director> getVertici(){
+	return this.grafo.vertexSet();
+	}
+	public Set<DefaultWeightedEdge> getArchi(){
+		return this.grafo.edgeSet();
+	}
+	public List<Director> getAdiacenti(Director director) {
+		List<Director> adiacenti = new LinkedList<>();
+		for(DefaultWeightedEdge e : this.grafo.outgoingEdgesOf(director)) {
+			adiacenti.add(this.grafo.getEdgeTarget(e));
+		}
+		return adiacenti;
+	}
 
 }
