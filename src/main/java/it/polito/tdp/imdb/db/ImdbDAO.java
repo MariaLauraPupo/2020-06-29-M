@@ -102,6 +102,7 @@ public class ImdbDAO {
 			st.setInt(1, anno);
 			ResultSet res = st.executeQuery();
 			while (res.next()) {
+				
 
 			result.add(map.get(res.getInt("id")));
 			}
@@ -115,9 +116,9 @@ public class ImdbDAO {
 	}
 	
 	public List<Arco> getArchi(int anno, Map<Integer,Director> map){
-		String sql ="SELECT md1.director_id AS id1, md2.director_id AS id2, COUNT(*) AS peso"
-				+ "FROM movies_directors AS md1, movies_directors AS md2, movies AS m1, movies AS m2, roles AS r1, roles AS r2 "
-				+ "WHERE md1.movie_id = m1.id AND md2.movie_id = m2.id AND m1.id = r1.movie_id AND m2.id = r2.movie_id AND m1.year = m2.year AND m1.year = ? "
+		String sql ="SELECT md1.director_id AS id1, md2.director_id AS id2, COUNT(*) AS peso "
+				+ "FROM movies_directors md1, movies_directors md2, movies m1, movies m2, roles r1, roles r2 "
+				+ "WHERE md1.director_id <> md2.director_id AND md1.movie_id = m1.id AND md2.movie_id = m2.id AND m1.id = r1.movie_id AND m2.id = r2.movie_id AND r1.actor_id = r2.actor_id AND m1.year = m2.year AND m1.year = ? "
 				+ "GROUP BY md1.director_id, md2.director_id";
 		List<Arco> result = new LinkedList<Arco>();
 		Connection conn = DBConnect.getConnection();
