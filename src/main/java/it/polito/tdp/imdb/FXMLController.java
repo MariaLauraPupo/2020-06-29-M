@@ -57,14 +57,17 @@ public class FXMLController {
 
     @FXML
     void doRegistiAdiacenti(ActionEvent event) {
-    	txtResult.clear();
+     	txtResult.clear();   	
     	Director regista = boxRegista.getValue();
-    	txtResult.appendText(model.getAdiacenti(regista).toString());
+    	txtResult.appendText(model.getAdiacenti(regista));
 
     }
 
     @FXML
     void doRicorsione(ActionEvent event) {
+    	txtResult.clear();
+    	Director director = boxRegista.getValue();
+    	txtResult.appendText(model.trovaPercorso(director).toString());
 
     }
 
